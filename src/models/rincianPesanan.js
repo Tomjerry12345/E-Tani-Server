@@ -1,43 +1,47 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Troli = new Schema({
-    idProduk: {
-        type: String,
-        required: true
-    },
-    namaProduk: {
-        type: String,
-        required: true
-    },
-    deskripsiProduk: {
-        type: String,
-        required: true
-    },
-    kategori: {
+const Pembayaran = new Schema({
+    alamatPembeli: {
         type: String,
         required: true
     },
     harga: {
-        type: Number,
+        type: Array,
         required: true
     },
-    stok: {
-        type: Number,
+    jumlah: {
+        type: Array,
         required: true
     },
-    image: {
+    metodePembayaran: {
         type: String,
+        required: true
+    },
+    namaProduk: {
+        type: Array,
+        required: true
+    },
+    rincian: {
+        type: Object,
+        required: true
+    },
+    statusPenerima: {
+        type: String,
+        required: true
+    },
+    statusPengiriman: {
+        type: String,
+        required: true
+    },
+    usernamePenjual: {
+        type: Array,
         required: true
     },
     usernamePembeli: {
         type: String,
         required: true
     },
-    usernamePenjual: {
-        type: String,
-        required: true
-    }
 });
 
-module.exports = mongoose.model('Troli', Troli);
+module.exports = mongoose.model('Pembayaran', Pembayaran);

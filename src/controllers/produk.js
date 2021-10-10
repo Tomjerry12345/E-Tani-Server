@@ -1,4 +1,4 @@
-const {validationResult} = require('express-validator');
+const { validationResult } = require('express-validator');
 const path = require('path');
 const fs = require('fs');
 
@@ -12,7 +12,7 @@ exports.createProduk = (req, res, next) => {
         const err = new Error(msg);
         err.status = 400;
         throw err;
-     }
+    }
 
     if (!req.file) {
         const err = new Error('Image harus di upload');
@@ -25,6 +25,7 @@ exports.createProduk = (req, res, next) => {
     const kategori = req.body.kategori;
     const harga = req.body.harga;
     const stok = req.body.stok;
+    const userNamePenjual = req.body.userNamePenjual;
     const image = req.file.path.replace(/\\/g, '/');
 
     const dataProduk = new Produk({
@@ -33,17 +34,18 @@ exports.createProduk = (req, res, next) => {
         kategori,
         harga,
         stok,
+        userNamePenjual,
         image,
     });
 
     dataProduk.save()
-    .then(result => {
-        res.status(200).json({
-            message: 'Data Produk Tersimpan',
-            data: result
+        .then(result => {
+            res.status(200).json({
+                message: 'Data Produk Tersimpan',
+                data: result
+            })
         })
-    })
-    .catch(err => console.log(err))
+        .catch(err => console.log(err))
 }
 
 // exports.getPerpageProduk = (req, res, next) => {
@@ -74,18 +76,39 @@ exports.getAllProduk = (req, res, next) => {
     let totalItems;
 
     Produk.find().countDocuments()
-    .then(count => {
-        totalItems = count
-        return Produk.find()
-    })
-    .then(result => {
-        res.status(200).json({
-            message: 'Data produk berhasil di get',
-            data: result,
-            totalData: totalItems,
+        .then(count => {
+            totalItems = count
+            return Produk.find()
         })
-    })
-    .catch(err => next(err))
+        .then(result => {
+            res.status(200).json({
+                message: 'Data produk berhasil di get',
+                data: result,
+                totalData: totalItems,
+            })
+        })
+        .catch(err => next(err))
+}
+
+exports.getProdukByName = (req, res, next) => {
+    let totalItems;
+    const username = req.params.username
+
+    Produk.find({
+        name: username
+    }).countDocuments()
+        .then(count => {
+            totalItems = count
+            return Produk.find()
+        })
+        .then(result => {
+            res.status(200).json({
+                message: 'Data produk berhasil di get',
+                data: result,
+                totalData: totalItems,
+            })
+        })
+        .catch(err => next(err))
 }
 
 exports.updateProduk = (req, res, next) => {
@@ -97,7 +120,7 @@ exports.updateProduk = (req, res, next) => {
         const err = new Error(msg);
         err.status = 400;
         throw err;
-     }
+    }
 
     if (!req.file) {
         const err = new Error('Image harus di upload');
@@ -114,56 +137,56 @@ exports.updateProduk = (req, res, next) => {
     const produkId = req.params.produkId;
 
     Produk.findById(produkId)
-    .then(produk => {
-        if(!produk) {
-            const err = new Error('Produk tidak ditemukan');
-            err.status = 404;
-            err.data = null;
-            throw err;
-        }
+        .then(produk => {
+            if (!produk) {
+                const err = new Error('Produk tidak ditemukan');
+                err.status = 404;
+                err.data = null;
+                throw err;
+            }
 
-        removeImage(produk.image);
+            removeImage(produk.image);
 
-        produk.namaProduk = namaProduk;
-        produk.deskripsiProduk = deskripsiProduk;
-        produk.kategori = kategori;
-        produk.harga = harga;
-        produk.stok = stok;
-        produk.image = image;
+            produk.namaProduk = namaProduk;
+            produk.deskripsiProduk = deskripsiProduk;
+            produk.kategori = kategori;
+            produk.harga = harga;
+            produk.stok = stok;
+            produk.image = image;
 
-        return produk.save();
-    })
-    .then(result => {
-        res.status(200).json({
-            message: 'Update berhasil',
-            data: result
+            return produk.save();
         })
-    })
-    .catch(err => next(err));
+        .then(result => {
+            res.status(200).json({
+                message: 'Update berhasil',
+                data: result
+            })
+        })
+        .catch(err => next(err));
 }
 
 exports.deleteProduk = (req, res, next) => {
     const produkId = req.params.produkId;
 
     Produk.findById(produkId)
-    .then(produk => {
-        if (!produk) {
-            const err = new Error('Produk tidak ditemukan');
-            err.status = 404;
-            err.data = null;
-            throw err;
-        }
+        .then(produk => {
+            if (!produk) {
+                const err = new Error('Produk tidak ditemukan');
+                err.status = 404;
+                err.data = null;
+                throw err;
+            }
 
-        removeImage(produk.image);
-        return Produk.findByIdAndRemove(produkId);
-    })
-    .then(result => {
-        res.status(200).json({
-            message: 'Hapus berhasil',
-            data: result
+            removeImage(produk.image);
+            return Produk.findByIdAndRemove(produkId);
         })
-    })
-    .catch(err => next(err));
+        .then(result => {
+            res.status(200).json({
+                message: 'Hapus berhasil',
+                data: result
+            })
+        })
+        .catch(err => next(err));
 }
 
 const removeImage = (filePath) => {
@@ -176,19 +199,19 @@ exports.getKategori = (req, res, next) => {
     let totalItems;
     console.log("kategori: ", kategori)
 
-    Produk.find({kategori: kategori}).countDocuments()
-    .then(count => {
-        totalItems = count
-        return Produk.find({kategori: kategori})
-    })
-    .then(result => {
-        res.status(200).json({
-            message: 'Data produk berhasil di get',
-            data: result,
-            totalData: totalItems,
+    Produk.find({ kategori: kategori }).countDocuments()
+        .then(count => {
+            totalItems = count
+            return Produk.find({ kategori: kategori })
         })
-    })
-    .catch(err => next(err))
+        .then(result => {
+            res.status(200).json({
+                message: 'Data produk berhasil di get',
+                data: result,
+                totalData: totalItems,
+            })
+        })
+        .catch(err => next(err))
 }
 
 exports.getCari = (req, res, next) => {
@@ -196,17 +219,17 @@ exports.getCari = (req, res, next) => {
     let totalItems;
     console.log("cari: ", cari)
 
-    Produk.find({namaProduk: cari}).countDocuments()
-    .then(count => {
-        totalItems = count
-        return Produk.find({namaProduk: cari})
-    })
-    .then(result => {
-        res.status(200).json({
-            message: 'Data produk berhasil di get',
-            data: result,
-            totalData: totalItems,
+    Produk.find({ namaProduk: cari }).countDocuments()
+        .then(count => {
+            totalItems = count
+            return Produk.find({ namaProduk: cari })
         })
-    })
-    .catch(err => next(err))
+        .then(result => {
+            res.status(200).json({
+                message: 'Data produk berhasil di get',
+                data: result,
+                totalData: totalItems,
+            })
+        })
+        .catch(err => next(err))
 }

@@ -17,6 +17,8 @@ produkControllers.createProduk);
 
 router.get('/getAllProduk', produkControllers.getAllProduk);
 
+router.get('/getProduk/:username', produkControllers.getProdukByName);
+
 router.put('/:produkId',
 [
     body('namaProduk').isLength({min: 1}).withMessage('nama produk tidak boleh kosong'),

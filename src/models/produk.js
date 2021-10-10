@@ -22,6 +22,10 @@ const Produk = new Schema({
         type: Number,
         required: true
     },
+    userNamePenjual: {
+        type: String,
+        required: true
+    },
     image: {
         type: String,
         required: true

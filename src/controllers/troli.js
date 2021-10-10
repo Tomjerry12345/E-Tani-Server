@@ -1,4 +1,4 @@
-const {validationResult} = require('express-validator');
+const { validationResult } = require('express-validator');
 const path = require('path');
 const fs = require('fs');
 
@@ -13,7 +13,8 @@ exports.createTroli = (req, res, next) => {
     const harga = req.body.harga;
     const stok = req.body.stok;
     const image = req.body.image;
-    const username = req.body.username;
+    const usernamePembeli = req.body.usernamePembeli;
+    const usernamePenjual = req.body.usernamePenjual;
 
     const dataTroli = new Troli({
         idProduk,
@@ -23,17 +24,18 @@ exports.createTroli = (req, res, next) => {
         harga,
         stok,
         image,
-        username
+        usernamePembeli,
+        usernamePenjual
     });
 
     dataTroli.save()
-    .then(result => {
-        res.status(200).json({
-            message: 'Pesanan masuk ke troli',
-            data: result
+        .then(result => {
+            res.status(200).json({
+                message: 'Pesanan masuk ke troli',
+                data: result
+            })
         })
-    })
-    .catch(err => console.log(err))
+        .catch(err => console.log(err))
 }
 
 // exports.getPerpageProduk = (req, res, next) => {
@@ -63,24 +65,23 @@ exports.createTroli = (req, res, next) => {
 exports.getTroli = (req, res, next) => {
     let totalItems;
     username = req.body.username;
-    console.log("username: ", username)
 
-    Troli.find({username: username}).countDocuments()
-    .then(count => {
-        totalItems = count
-        return Troli.find({username: username})
-    })
-    .then(result => {
-        res.status(200).json({
-            message: 'Data produk berhasil di get',
-            data: result,
-            totalData: totalItems,
+    Troli.find({ usernamePembeli: username }).countDocuments()
+        .then(count => {
+            totalItems = count
+            return Troli.find({ usernamePembeli: username })
         })
-    })
-    .catch(err => {
-        console.log("error: ", err)
-        next(err)
-    })
+        .then(result => {
+            res.status(200).json({
+                message: 'Data produk berhasil di get',
+                data: result,
+                totalData: totalItems,
+            })
+        })
+        .catch(err => {
+            console.log("error: ", err)
+            next(err)
+        })
 }
 
 // exports.updateProduk = (req, res, next) => {
@@ -106,7 +107,7 @@ exports.getTroli = (req, res, next) => {
 //     const harga = req.body.harga;
 //     const stok = req.body.stok;
 //     const image = req.file.path.replace(/\\/g, '/');
-//     const produkId = req.params.produkId;
+//     const troliId = req.params.produkId;
 
 //     Produk.findById(produkId)
 //     .then(produk => {
@@ -137,32 +138,32 @@ exports.getTroli = (req, res, next) => {
 //     .catch(err => next(err));
 // }
 
-// exports.deleteProduk = (req, res, next) => {
-//     const produkId = req.params.produkId;
+exports.deleteTroli = (req, res, next) => {
+    const troliId = req.params.troliId;
 
-//     Produk.findById(produkId)
-//     .then(produk => {
-//         if (!produk) {
-//             const err = new Error('Produk tidak ditemukan');
-//             err.status = 404;
-//             err.data = null;
-//             throw err;
-//         }
+    Troli.findById(troliId)
+        .then(produk => {
+            if (!produk) {
+                const err = new Error('Produk tidak ditemukan');
+                err.status = 404;
+                err.data = null;
+                throw err;
+            }
 
-//         removeImage(produk.image);
-//         return Produk.findByIdAndRemove(produkId);
-//     })
-//     .then(result => {
-//         res.status(200).json({
-//             message: 'Hapus berhasil',
-//             data: result
-//         })
-//     })
-//     .catch(err => next(err));
-// }
+            removeImage(produk.image);
+            return Troli.findByIdAndRemove(troliId);
+        })
+        .then(result => {
+            res.status(200).json({
+                message: 'Hapus berhasil',
+                data: result
+            })
+        })
+        .catch(err => next(err));
+}
 
-// const removeImage = (filePath) => {
-//     console.log(filePath);
-//     filePath = path.join(__dirname, '../..', filePath);
-//     fs.unlink(filePath, err => console.log(err));
-// }   
+const removeImage = (filePath) => {
+    console.log(filePath);
+    filePath = path.join(__dirname, '../..', filePath);
+    fs.unlink(filePath, err => console.log(err));
+}
