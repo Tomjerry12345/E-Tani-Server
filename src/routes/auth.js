@@ -25,6 +25,20 @@ router.post('/login',
     body('password').isLength({min: 2}).withMessage('password tidak boleh kosong'),
 ],
 authControllers.login);
+
+router.post('/checkUsername', 
+[
+    body('username').isLength({min: 2}).withMessage('username tidak boleh kosong'),
+],
+authControllers.checkUsername);
+
+router.post('/recoveryPassword/:username', 
+[
+    body('passwordLama').isLength({min: 2}).withMessage('Password lama tidak boleh kosong'),
+    body('passwordBaru').isLength({min: 2}).withMessage('Password baru tidak boleh kosong'),
+],
+authControllers.recoveryPassword);
+
 router.put('/logout', authControllers.logOut);
 
 module.exports = router;

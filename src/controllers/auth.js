@@ -61,7 +61,7 @@ exports.login = (req, res, next) => {
             error.data = null;
             throw error;
         }
-        return Users.find({password: password});
+        return Users.find({username: username, password: password});
     })
     .then(result => {
         if (result.length == 0) {
@@ -91,4 +91,82 @@ exports.logOut = (req, res, next) => {
         message: 'Berhasil logout'
         })
     })
+}
+
+exports.checkUsername = (req, res, next) => {
+
+    console.log('check username')
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+       const errorValue = errors.array()
+       const msg = errorValue[0].msg
+       const err = new Error(msg);
+       err.status = 400;
+       throw err;
+    }
+
+    const username = req.body.username
+
+    Users.find({username: username})
+    .then(result => {
+        console.log(result.length)
+        let code, msessage
+        if (result.length === 0) {
+            const err = new Error("username tidak ditemukan");
+            err.status = 400;
+            throw err;
+        }
+        else {
+            res.status(200).json({
+                message: "username ditemukan"
+            })
+        }
+
+      
+    })
+
+    .catch(err => next(err))
+}
+
+exports.recoveryPassword = (req, res, next) => {
+
+    console.log(`recoveryPassword => ${JSON.stringify(req.body)}`)
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+       const errorValue = errors.array()
+       const msg = errorValue[0].msg
+       const err = new Error(msg);
+       err.status = 400;
+       throw err;
+    }
+
+    const passwordLama = req.body.passwordLama
+    const passwordBaru = req.body.passwordBaru
+    const username = req.params.username
+
+    console.log(`myUsername => ${username}`)
+
+    Users.find({username: username, password: passwordLama})
+    .then(result => {
+         if (result.length === 0) {
+            const err = new Error("Password lama salah coba lagi");
+            err.status = 400;
+            throw err;
+        } else {
+            console.log(`result => Sukses`)
+            Users.findOneAndUpdate({username: username}, {password: passwordBaru}, (err, doc) => {
+                if (err) next(err)
+                console.log("user: ", doc)
+            
+                res.status(200).json({
+                    message: 'Password berhasil di ubah'
+                })
+            })
+        }
+    })
+    .catch(err => next(err))
 }
