@@ -16,8 +16,6 @@ exports.tambahRincianPesanan = (req, res, next) => {
     const userNamePenjual = req.body.dataRincianPesanan.userNamePenjual;
     const usernamePembeli = req.body.dataRincianPesanan.usernamePembeli;
 
-    console.log(`req.body => ${JSON.stringify(req.body)}`)
-
     const dataRincianPesanan = new RincianPesanan({
         alamatPembeli,
         harga,
@@ -48,9 +46,6 @@ exports.getRincianPesanan = (req, res, next) => {
 
     let query = jenisAkun === 'Konsumen' ? "usernamePembeli" : "usernamePenjual"
 
-    console.log(`username => ${username}`)
-    console.log(`jenisAkun => ${jenisAkun}`)
-
     RincianPesanan.find({
         query: username
     }).countDocuments()
@@ -72,14 +67,6 @@ exports.updateRincianPesanan = (req, res, next) => {
     const id = req.params.id
 
     const { message, jenisAkun } = req.body.data
-
-    console.log(`req.body => ${JSON.stringify(req.body)}`)
-    // const usernamePembeli = req.body.dataRincianPesanan.usernamePembeli;
-
-    // const username = req.body.username
-    // const jenisAkun = req.body.jenisAkun
-
-    // let query = jenisAkun === 'Konsumen' ? "usernamePembeli" : "usernamePenjual"
 
     if (jenisAkun === 'Konsumen') {
         RincianPesanan.findById(id)
@@ -122,7 +109,5 @@ exports.updateRincianPesanan = (req, res, next) => {
             })
             .catch(err => next(err));
     }
-
-
 
 }

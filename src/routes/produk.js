@@ -1,38 +1,44 @@
-const express = require('express');
-const {body} = require('express-validator');
+const express = require("express");
+const { body } = require("express-validator");
 
 const router = express.Router();
 
-const produkControllers = require('../controllers/produk');
+const produkControllers = require("../controllers/produk");
 
-router.post('/createProduk',
-[
-    body('namaProduk').isLength({min: 1}).withMessage('nama produk tidak boleh kosong'),
-    body('deskripsiProduk').isLength({min: 1}).withMessage('deskripsi tidak boleh kosong'),
-    body('kategori').isLength({min: 1}).withMessage('kategori tidak boleh kosong'),
-    body('harga').isLength({min: 1}).withMessage('harga tidak boleh kosong'),
-    body('stok').isLength({min: 1}).withMessage('stok tidak boleh kosong'),
-],
-produkControllers.createProduk);
+router.post(
+  "/createProduk",
+  [
+    body("namaProduk").isLength({ min: 1 }).withMessage("nama produk tidak boleh kosong"),
+    body("deskripsiProduk").isLength({ min: 1 }).withMessage("deskripsi tidak boleh kosong"),
+    body("kategori").isLength({ min: 1 }).withMessage("kategori tidak boleh kosong"),
+    body("harga").isLength({ min: 1 }).withMessage("harga tidak boleh kosong"),
+    body("stok").isLength({ min: 1 }).withMessage("stok tidak boleh kosong"),
+  ],
+  produkControllers.createProduk
+);
 
-router.get('/getAllProduk', produkControllers.getAllProduk);
+router.get("/getAllProduk", produkControllers.getAllProduk);
 
-router.get('/getProduk/:username', produkControllers.getProdukByName);
+router.get("/getProduk/:username", produkControllers.getProdukByName);
 
-router.put('/:produkId',
-[
-    body('namaProduk').isLength({min: 1}).withMessage('nama produk tidak boleh kosong'),
-    body('deskripsiProduk').isLength({min: 1}).withMessage('deskripsi tidak boleh kosong'),
-    body('kategori').isLength({min: 1}).withMessage('kategori tidak boleh kosong'),
-    body('harga').isLength({min: 1}).withMessage('harga tidak boleh kosong'),
-    body('stok').isLength({min: 1}).withMessage('stok tidak boleh kosong'),
-],
- produkControllers.updateProduk);
+router.put(
+  "/:produkId",
+  [
+    body("namaProduk").isLength({ min: 1 }).withMessage("nama produk tidak boleh kosong"),
+    body("deskripsiProduk").isLength({ min: 1 }).withMessage("deskripsi tidak boleh kosong"),
+    body("kategori").isLength({ min: 1 }).withMessage("kategori tidak boleh kosong"),
+    body("harga").isLength({ min: 1 }).withMessage("harga tidak boleh kosong"),
+    body("stok").isLength({ min: 1 }).withMessage("stok tidak boleh kosong"),
+  ],
+  produkControllers.updateProduk
+);
 
-router.delete('/:produkId', produkControllers.deleteProduk);
+router.put("/updateStok/:produkId", produkControllers.updateStok);
 
-router.get('/kategori/:kategori', produkControllers.getKategori)
+router.delete("/:produkId", produkControllers.deleteProduk);
 
-router.get('/cari/:cari', produkControllers.getCari)
+router.get("/kategori/:kategori", produkControllers.getKategori);
+
+router.get("/cari/:cari", produkControllers.getCari);
 
 module.exports = router;
