@@ -6,7 +6,8 @@ const path = require("path");
 const cors = require("cors");
 
 // const dbUrl = 'mongodb://admin:admin@dbhasiltani-shard-00-00.r5lx4.mongodb.net:27017,dbhasiltani-shard-00-01.r5lx4.mongodb.net:27017,dbhasiltani-shard-00-02.r5lx4.mongodb.net:27017/dbHasilTani?ssl=true&replicaSet=atlas-3o0w7g-shard-0&authSource=admin&retryWrites=true&w=majority'
-const dbUrl = "mongodb+srv://kiki:kiki12345@dbtani.n3snp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const dbUrl =
+  "mongodb://kiki:kiki12345@dbtani-shard-00-00.n3snp.mongodb.net:27017,dbtani-shard-00-01.n3snp.mongodb.net:27017,dbtani-shard-00-02.n3snp.mongodb.net:27017/db_tani?ssl=true&replicaSet=atlas-ns9o97-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const app = express();
 

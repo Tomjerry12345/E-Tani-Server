@@ -2,8 +2,8 @@ const midtransClient = require("midtrans-client");
 
 const snap = new midtransClient.Snap({
   isProduction: false,
-  serverKey: "SB-Mid-server-v3SOA6yd2pYXsymdalJpmW2d",
-  clientKey: "SB-Mid-client-c7Y2joxVHoZcQFsk",
+  serverKey: "SB-Mid-server-iWfAteNAZ0zKAUWyUkQQrLZo",
+  clientKey: "SB-Mid-client-zPg9zkbVo04qYmY9",
 });
 
 exports.transaction = async (req, res, next) => {
