@@ -13,6 +13,7 @@ router.post(
     body("kategori").isLength({ min: 1 }).withMessage("kategori tidak boleh kosong"),
     body("harga").isLength({ min: 1 }).withMessage("harga tidak boleh kosong"),
     body("stok").isLength({ min: 1 }).withMessage("stok tidak boleh kosong"),
+    body("userNamePenjual").isLength({ min: 1 }).withMessage("username tidak boleh kosong"),
   ],
   produkControllers.createProduk
 );

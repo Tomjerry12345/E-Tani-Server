@@ -1,42 +1,42 @@
-const { validationResult } = require('express-validator');
-const path = require('path');
-const fs = require('fs');
+const { validationResult } = require("express-validator");
+const path = require("path");
+const fs = require("fs");
 
-const Troli = require('../models/troli');
+const Troli = require("../models/troli");
 
 exports.createTroli = (req, res, next) => {
+  const idProduk = req.body.idProduk;
+  const namaProduk = req.body.namaProduk;
+  const deskripsiProduk = req.body.deskripsiProduk;
+  const kategori = req.body.kategori;
+  const harga = req.body.harga;
+  const stok = req.body.stok;
+  const image = req.body.image;
+  const usernamePembeli = req.body.usernamePembeli;
+  const usernamePenjual = req.body.usernamePenjual;
 
-    const idProduk = req.body.idProduk;
-    const namaProduk = req.body.namaProduk;
-    const deskripsiProduk = req.body.deskripsiProduk;
-    const kategori = req.body.kategori;
-    const harga = req.body.harga;
-    const stok = req.body.stok;
-    const image = req.body.image;
-    const usernamePembeli = req.body.usernamePembeli;
-    const usernamePenjual = req.body.usernamePenjual;
+  const dataTroli = new Troli({
+    idProduk,
+    namaProduk,
+    deskripsiProduk,
+    kategori,
+    harga,
+    stok,
+    image,
+    usernamePembeli,
+    usernamePenjual,
+  });
 
-    const dataTroli = new Troli({
-        idProduk,
-        namaProduk,
-        deskripsiProduk,
-        kategori,
-        harga,
-        stok,
-        image,
-        usernamePembeli,
-        usernamePenjual
-    });
-
-    dataTroli.save()
-        .then(result => {
-            res.status(200).json({
-                message: 'Pesanan masuk ke troli',
-                data: result
-            })
-        })
-        .catch(err => console.log(err))
-}
+  dataTroli
+    .save()
+    .then((result) => {
+      res.status(200).json({
+        message: "Pesanan masuk ke troli",
+        data: result,
+      });
+    })
+    .catch((err) => console.log(err));
+};
 
 // exports.getPerpageProduk = (req, res, next) => {
 //     const currentPage = req.query.page || 1;
@@ -63,26 +63,29 @@ exports.createTroli = (req, res, next) => {
 // }
 
 exports.getTroli = (req, res, next) => {
-    let totalItems;
-    username = req.body.username;
+  let totalItems;
+  username = req.body.username;
 
-    Troli.find({ usernamePembeli: username }).countDocuments()
-        .then(count => {
-            totalItems = count
-            return Troli.find({ usernamePembeli: username })
-        })
-        .then(result => {
-            res.status(200).json({
-                message: 'Data produk berhasil di get',
-                data: result,
-                totalData: totalItems,
-            })
-        })
-        .catch(err => {
-            console.log("error: ", err)
-            next(err)
-        })
-}
+  //   console.log(`usernamePembeli => ${usernamePembeli}`);
+
+  Troli.find({ usernamePembeli: username })
+    .countDocuments()
+    .then((count) => {
+      totalItems = count;
+      return Troli.find({ usernamePembeli: username });
+    })
+    .then((result) => {
+      res.status(200).json({
+        message: "Data produk berhasil di get",
+        data: result,
+        totalData: totalItems,
+      });
+    })
+    .catch((err) => {
+      console.log("error: ", err);
+      next(err);
+    });
+};
 
 // exports.updateProduk = (req, res, next) => {
 //     const errors = validationResult(req);
@@ -139,31 +142,31 @@ exports.getTroli = (req, res, next) => {
 // }
 
 exports.deleteTroli = (req, res, next) => {
-    const troliId = req.params.troliId;
+  const troliId = req.params.troliId;
 
-    Troli.findById(troliId)
-        .then(produk => {
-            if (!produk) {
-                const err = new Error('Produk tidak ditemukan');
-                err.status = 404;
-                err.data = null;
-                throw err;
-            }
+  Troli.findById(troliId)
+    .then((produk) => {
+      if (!produk) {
+        const err = new Error("Produk tidak ditemukan");
+        err.status = 404;
+        err.data = null;
+        throw err;
+      }
 
-            removeImage(produk.image);
-            return Troli.findByIdAndRemove(troliId);
-        })
-        .then(result => {
-            res.status(200).json({
-                message: 'Hapus berhasil',
-                data: result
-            })
-        })
-        .catch(err => next(err));
-}
+      removeImage(produk.image);
+      return Troli.findByIdAndRemove(troliId);
+    })
+    .then((result) => {
+      res.status(200).json({
+        message: "Hapus berhasil",
+        data: result,
+      });
+    })
+    .catch((err) => next(err));
+};
 
 const removeImage = (filePath) => {
-    console.log(filePath);
-    filePath = path.join(__dirname, '../..', filePath);
-    fs.unlink(filePath, err => console.log(err));
-}
+  console.log(filePath);
+  filePath = path.join(__dirname, "../..", filePath);
+  fs.unlink(filePath, (err) => console.log(err));
+};

@@ -96,13 +96,15 @@ exports.getProdukByName = (req, res, next) => {
   let totalItems;
   const username = req.params.username;
 
+  console.log(`getProdukByName => ${username}`);
+
   Produk.find({
-    name: username,
+    userNamePenjual: username,
   })
     .countDocuments()
     .then((count) => {
       totalItems = count;
-      return Produk.find();
+      return Produk.find({ userNamePenjual: username });
     })
     .then((result) => {
       res.status(200).json({
