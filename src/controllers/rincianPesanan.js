@@ -118,3 +118,26 @@ exports.updateRincianPesanan = (req, res, next) => {
       .catch((err) => next(err));
   }
 };
+
+exports.deleteRincianPesanan = (req, res, next) => {
+  const id = req.params.id;
+
+  RincianPesanan.findById(id)
+    .then((pesanan) => {
+      if (!pesanan) {
+        const err = new Error("Produk tidak ditemukan");
+        err.status = 404;
+        err.data = null;
+        throw err;
+      }
+
+      return RincianPesanan.findByIdAndRemove(id);
+    })
+    .then((result) => {
+      res.status(200).json({
+        message: "Hapus berhasil",
+        data: result,
+      });
+    })
+    .catch((err) => next(err));
+};
