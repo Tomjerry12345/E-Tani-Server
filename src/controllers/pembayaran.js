@@ -2,7 +2,7 @@ const midtransClient = require("midtrans-client");
 
 const snap = new midtransClient.Snap({
   isProduction: false,
-  serverKey: "SB-Mid-server-uyRCzPSdzjsIRxIoJ1uIaTY7",
+  serverKey: "SB-Mid-server-uyRCzPSdzjsIRxIoJ1uIaTY790999999999",
   clientKey: "SB-Mid-client-Dh04q8xxSg1Q9nqh",
 });
 
