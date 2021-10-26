@@ -163,13 +163,42 @@ exports.recoveryPassword = (req, res, next) => {
     throw err;
   }
 
-  const passwordLama = req.body.passwordLama;
+  // const passwordLama = req.body.passwordLama;
   const passwordBaru = req.body.passwordBaru;
   const username = req.params.username;
 
   console.log(`myUsername => ${username}`);
 
-  Users.find({ username: username, password: passwordLama })
+  // Users.findOneAndUpdate({ username: username }, { password: passwordBaru }, (err, doc) => {
+  //   if (err) next(err);
+  //   console.log("user: ", doc);
+
+  //   res.status(200).json({
+  //     message: "Password berhasil di ubah",
+  //   });
+  // });
+
+  // Users.find({ username: username, password: passwordLama })
+  //   .then((result) => {
+  //     if (result.length === 0) {
+  //       const err = new Error("Password lama salah coba lagi");
+  //       err.status = 400;
+  //       throw err;
+  //     } else {
+  //       console.log(`result => Sukses`);
+  //       Users.findOneAndUpdate({ username: username }, { password: passwordBaru }, (err, doc) => {
+  //         if (err) next(err);
+  //         console.log("user: ", doc);
+
+  //         res.status(200).json({
+  //           message: "Password berhasil di ubah",
+  //         });
+  //       });
+  //     }
+  //   })
+  //   .catch((err) => next(err));
+
+  Users.find({ username: username })
     .then((result) => {
       if (result.length === 0) {
         const err = new Error("Password lama salah coba lagi");
