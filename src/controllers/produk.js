@@ -153,7 +153,7 @@ exports.updateProduk = (req, res, next) => {
   const kategori = req.body.kategori;
   const harga = req.body.harga;
   const stok = req.body.stok;
-  const image = req.file.path.replace(/\\/g, "/");
+  // const image = req.file.path.replace(/\\/g, "/");
   const produkId = req.params.produkId;
 
   Produk.findById(produkId)
