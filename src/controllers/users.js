@@ -67,9 +67,10 @@ exports.updateUsers = (req, res, next) => {
       user.noHp = noHp;
       user.kabupaten = kabupaten;
       user.kecamatan = kecamatan;
-      user.image = image;
 
       removeImage(user.image);
+
+      user.image = image;
 
       return user.save();
     })
