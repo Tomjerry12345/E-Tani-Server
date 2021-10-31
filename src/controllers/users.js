@@ -37,7 +37,7 @@ exports.updateUsers = (req, res, next) => {
     }
 
     if (req.file.path.includes("\\")) image = req.file.path.replace(/\\/g, "/");
-    else image = req.file.path;
+    // else image = req.file.path;
   } else {
     image = req.body.image;
   }
