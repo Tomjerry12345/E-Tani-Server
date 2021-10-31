@@ -52,7 +52,7 @@ exports.updateUsers = (req, res, next) => {
         throw err;
       }
 
-      removeImage(produk.image);
+      removeImage(user.image);
 
       user.namaLengkap = namaLengkap;
       user.jenisKelamin = jenisKelamin;
