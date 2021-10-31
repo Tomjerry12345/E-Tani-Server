@@ -61,8 +61,6 @@ exports.updateUsers = (req, res, next) => {
         throw err;
       }
 
-      removeImage(user.image);
-
       user.namaLengkap = namaLengkap;
       user.jenisKelamin = jenisKelamin;
       user.alamat = alamat;
@@ -70,6 +68,8 @@ exports.updateUsers = (req, res, next) => {
       user.kabupaten = kabupaten;
       user.kecamatan = kecamatan;
       user.image = image;
+
+      removeImage(user.image);
 
       return user.save();
     })
