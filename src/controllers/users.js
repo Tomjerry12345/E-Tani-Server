@@ -68,7 +68,7 @@ exports.updateUsers = (req, res, next) => {
       user.kabupaten = kabupaten;
       user.kecamatan = kecamatan;
 
-      removeImage(user.image);
+      // removeImage(user.image);
 
       user.image = image;
 
