@@ -167,9 +167,9 @@ exports.updateProduk = (req, res, next) => {
         throw err;
       }
 
-      if (produk.image !== image) {
-        removeImage(produk.image);
-      }
+      // if (produk.image !== image) {
+      //   removeImage(produk.image);
+      // }
 
       produk.namaProduk = namaProduk;
       produk.deskripsiProduk = deskripsiProduk;
