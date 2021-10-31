@@ -25,7 +25,7 @@ exports.updateUsers = (req, res, next) => {
   //   }
 
   console.log(`body => ${JSON.stringify(req.body)}`);
-  console.log(`file => ${JSON.stringify(req.file)}`);
+  // console.log(`file => ${JSON.stringify(req.file)}`);
 
   let image;
 
@@ -37,7 +37,7 @@ exports.updateUsers = (req, res, next) => {
     }
 
     if (req.file.path.includes("\\")) image = req.file.path.replace(/\\/g, "/");
-    // else image = req.file.path;
+    else image = req.file.path;
   } else {
     image = req.body.image;
   }
