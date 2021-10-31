@@ -156,6 +156,8 @@ exports.updateProduk = (req, res, next) => {
   // const image = req.file.path.replace(/\\/g, "/");
   const produkId = req.params.produkId;
 
+  console.log(`image => ${image}`);
+
   Produk.findById(produkId)
     .then((produk) => {
       if (!produk) {
