@@ -119,18 +119,33 @@ exports.getProdukByName = (req, res, next) => {
 exports.updateProduk = (req, res, next) => {
   const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    const errorValue = errors.array();
-    const msg = errorValue[0].msg;
-    const err = new Error(msg);
-    err.status = 400;
-    throw err;
-  }
+  // if (!errors.isEmpty()) {
+  //   const errorValue = errors.array();
+  //   const msg = errorValue[0].msg;
+  //   const err = new Error(msg);
+  //   err.status = 400;
+  //   throw err;
+  // }
 
-  if (!req.file) {
-    const err = new Error("Image harus di upload");
-    err.status = 422;
-    throw err;
+  // if (!req.file) {
+  //   const err = new Error("Image harus di upload");
+  //   err.status = 422;
+  //   throw err;
+  // }
+
+  let image;
+
+  if (req.body.image === undefined) {
+    if (!req.file) {
+      const err = new Error("Image harus di upload");
+      err.status = 422;
+      throw err;
+    }
+
+    if (req.file.path.includes("\\")) image = req.file.path.replace(/\\/g, "/");
+    else image = req.file.path;
+  } else {
+    image = req.body.image;
   }
 
   const namaProduk = req.body.namaProduk;

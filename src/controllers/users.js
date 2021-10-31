@@ -14,18 +14,7 @@ exports.getAllUser = (req, res, next) => {
 };
 
 exports.updateUsers = (req, res, next) => {
-  //   const errors = validationResult(req);
-
-  //   if (!errors.isEmpty()) {
-  //     const errorValue = errors.array();
-  //     const msg = errorValue[0].msg;
-  //     const err = new Error(msg);
-  //     err.status = 400;
-  //     throw err;
-  //   }
-
   console.log(`body => ${JSON.stringify(req.body)}`);
-  // console.log(`file => ${JSON.stringify(req.file)}`);
 
   let image;
 
@@ -63,14 +52,14 @@ exports.updateUsers = (req, res, next) => {
         throw err;
       }
 
+      removeImage(produk.image);
+
       user.namaLengkap = namaLengkap;
       user.jenisKelamin = jenisKelamin;
       user.alamat = alamat;
       user.noHp = noHp;
       user.kabupaten = kabupaten;
       user.kecamatan = kecamatan;
-
-      // removeImage(user.image);
 
       user.image = image;
 
