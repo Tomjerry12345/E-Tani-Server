@@ -26,7 +26,10 @@ exports.createProduk = (req, res, next) => {
   const harga = req.body.harga;
   const stok = req.body.stok;
   const userNamePenjual = req.body.userNamePenjual;
+  const namaPenjual = req.body.namaPenjual;
   const image = req.file.path.replace(/\\/g, "/");
+
+  console.log("req.body => ", req.body);
 
   const dataProduk = new Produk({
     namaProduk,
@@ -35,6 +38,7 @@ exports.createProduk = (req, res, next) => {
     harga,
     stok,
     userNamePenjual,
+    namaPenjual,
     image,
   });
 
