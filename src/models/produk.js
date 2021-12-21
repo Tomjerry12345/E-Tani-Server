@@ -6,6 +6,10 @@ const Produk = new Schema({
     type: String,
     required: true,
   },
+  namaKondisi: {
+    type: String,
+    required: true,
+  },
   deskripsiProduk: {
     type: String,
     required: true,

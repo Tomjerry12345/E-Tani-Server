@@ -183,6 +183,7 @@ exports.updateProduk = (req, res, next) => {
       // }
 
       produk.namaProduk = namaProduk;
+      produk.namaKondisi = namaKondisi;
       produk.deskripsiProduk = deskripsiProduk;
       produk.kategori = kategori;
       produk.harga = harga;
