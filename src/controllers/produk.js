@@ -21,6 +21,7 @@ exports.createProduk = (req, res, next) => {
   }
 
   const namaProduk = req.body.namaProduk;
+  const namaKondisi = req.body.namaKondisi;
   const deskripsiProduk = req.body.deskripsiProduk;
   const kategori = req.body.kategori;
   const harga = req.body.harga;
@@ -35,6 +36,7 @@ exports.createProduk = (req, res, next) => {
 
   const dataProduk = new Produk({
     namaProduk,
+    namaKondisi,
     deskripsiProduk,
     kategori,
     harga,
@@ -157,6 +159,7 @@ exports.updateProduk = (req, res, next) => {
   }
 
   const namaProduk = req.body.namaProduk;
+  const namaKondisi = req.body.namaKondisi;
   const deskripsiProduk = req.body.deskripsiProduk;
   const kategori = req.body.kategori;
   const harga = req.body.harga;
