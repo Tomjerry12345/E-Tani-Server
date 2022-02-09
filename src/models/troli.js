@@ -37,10 +37,6 @@ const Troli = new Schema({
     usernamePenjual: {
         type: String,
         required: true
-    },
-    namaPembeli: {
-        type: String,
-        required: true
     }
 });
 

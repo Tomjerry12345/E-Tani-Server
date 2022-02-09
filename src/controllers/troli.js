@@ -14,9 +14,6 @@ exports.createTroli = (req, res, next) => {
   const image = req.body.image;
   const usernamePembeli = req.body.usernamePembeli;
   const usernamePenjual = req.body.usernamePenjual;
-  const namaPembeli = req.body.namaPembeli;
-
-  console.log("namaPembeli => ", namaPembeli)
 
   const dataTroli = new Troli({
     idProduk,
@@ -27,8 +24,7 @@ exports.createTroli = (req, res, next) => {
     stok,
     image,
     usernamePembeli,
-    usernamePenjual,
-    namaPembeli
+    usernamePenjual
   });
 
   dataTroli
