@@ -46,6 +46,10 @@ const Pembayaran = new Schema({
         type: String,
         required: true
     },
+    noHp: {
+        type: String,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('Pembayaran', Pembayaran);
