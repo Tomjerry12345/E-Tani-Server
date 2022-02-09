@@ -21,9 +21,6 @@ exports.tambahRincianPesanan = (req, res, next) => {
   const namaPembeli = rincianPesanan.namaPembeli;
   const noHp = rincianPesanan.noHp;
 
-  console.log(`namaProduk => ${JSON.stringify(namaProduk)}`);
-  console.log(`userNamePenjual => ${JSON.stringify(userNamePenjual)}`);
-
   const dataRincianPesanan = new RincianPesanan({
     alamatPembeli,
     harga,
