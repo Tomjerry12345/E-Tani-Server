@@ -5,18 +5,21 @@
 const RincianPesanan = require("../models/rincianPesanan");
 
 exports.tambahRincianPesanan = (req, res, next) => {
-  const alamatPembeli = req.body.dataRincianPesanan.alamatPembeli;
-  const harga = req.body.dataRincianPesanan.harga;
-  const jumlah = req.body.dataRincianPesanan.jumlah;
-  const metodePembayaran = req.body.dataRincianPesanan.metodePembayaran;
-  const namaProduk = req.body.dataRincianPesanan.namaProduk;
-  const rincian = req.body.dataRincianPesanan.rincian;
-  const statusPenerima = req.body.dataRincianPesanan.statusPenerima;
-  const statusPengiriman = req.body.dataRincianPesanan.statusPengiriman;
-  const userNamePenjual = req.body.dataRincianPesanan.userNamePenjual;
-  const usernamePembeli = req.body.dataRincianPesanan.usernamePembeli;
-  const namaPembeli = req.body.dataRincianPesanan.namaPembeli;
-  const noHp = req.body.dataRincianPesanan.noHp;
+
+  const rincianPesanan = req.body.dataRincianPesanan
+
+  const alamatPembeli = rincianPesanan.alamatPembeli;
+  const harga = rincianPesanan.harga;
+  const jumlah = rincianPesanan.jumlah;
+  const metodePembayaran = rincianPesanan.metodePembayaran;
+  const namaProduk = rincianPesanan.namaProduk;
+  const rincian = rincianPesanan.rincian;
+  const statusPenerima = rincianPesanan.statusPenerima;
+  const statusPengiriman = rincianPesanan.statusPengiriman;
+  const userNamePenjual = rincianPesanan.userNamePenjual;
+  const usernamePembeli = rincianPesanan.usernamePembeli;
+  const namaPembeli = rincianPesanan.namaPembeli;
+  const noHp = rincianPesanan.noHp;
 
   console.log(`namaProduk => ${JSON.stringify(namaProduk)}`);
   console.log(`userNamePenjual => ${JSON.stringify(userNamePenjual)}`);
