@@ -35,8 +35,6 @@ exports.tambahRincianPesanan = (req, res, next) => {
     statusPengiriman,
     usernamePenjual: userNamePenjual,
     usernamePembeli,
-    namaPembeli,
-    noHp
   });
 
   dataRincianPesanan
