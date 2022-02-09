@@ -15,6 +15,7 @@ exports.tambahRincianPesanan = (req, res, next) => {
   const statusPengiriman = req.body.dataRincianPesanan.statusPengiriman;
   const userNamePenjual = req.body.dataRincianPesanan.userNamePenjual;
   const usernamePembeli = req.body.dataRincianPesanan.usernamePembeli;
+  const namaPembeli = req.body.dataRincianPesanan.namaPembeli;
 
   console.log(`namaProduk => ${JSON.stringify(namaProduk)}`);
   console.log(`userNamePenjual => ${JSON.stringify(userNamePenjual)}`);
@@ -30,6 +31,7 @@ exports.tambahRincianPesanan = (req, res, next) => {
     statusPengiriman,
     usernamePenjual: userNamePenjual,
     usernamePembeli,
+    namaPembeli
   });
 
   dataRincianPesanan

@@ -17,7 +17,6 @@ exports.createTroli = (req, res, next) => {
   const namaPembeli = req.body.namaPembeli;
 
   console.log("namaPembeli => ", namaPembeli)
-  console.log("req => ", req)
 
   const dataTroli = new Troli({
     idProduk,
