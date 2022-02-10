@@ -18,8 +18,6 @@ exports.tambahRincianPesanan = (req, res, next) => {
   const statusPengiriman = rincianPesanan.statusPengiriman;
   const userNamePenjual = rincianPesanan.userNamePenjual;
   const usernamePembeli = rincianPesanan.usernamePembeli;
-  const namaPembeli = rincianPesanan.namaPembeli;
-  const noHp = rincianPesanan.noHp;
 
   const dataRincianPesanan = new RincianPesanan({
     alamatPembeli,
