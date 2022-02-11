@@ -19,7 +19,7 @@ const Produk = new Schema({
     required: true,
   },
   harga: {
-    type: Number,
+    type: String,
     required: true,
   },
   stok: {
