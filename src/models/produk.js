@@ -20,6 +20,9 @@ const Produk = new Schema({
   },
   harga: {
     type: Number,
+    speed:{
+      type: mongoose.Types.Decimal128
+    },
     required: true,
   },
   stok: {
