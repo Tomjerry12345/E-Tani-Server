@@ -7,7 +7,7 @@ const Pembayaran = new Schema({
         required: true
     },
     harga: {
-        type: Number,
+        type: Array,
         required: true
     },
     jumlah: {
