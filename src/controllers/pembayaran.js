@@ -11,7 +11,7 @@ exports.transaction = async (req, res, next) => {
   let parameter = {
     transaction_details: {
       order_id: `transaction-${Date.now()}`,
-      gross_amount: total + '.000',
+      gross_amount: total,
     },
     credit_card: {
       secure: true,
