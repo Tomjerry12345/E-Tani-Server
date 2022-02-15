@@ -27,6 +27,8 @@ exports.register = (req, res, next) => {
   const kabupaten = req.body.kabupaten;
   const kecamatan = req.body.kecamatan;
   const kategori = req.body.kategori;
+  const noRekening = req.body.noRekening;
+  const namaBank = req.body.namaBank;
   const statusLogin = req.body.statusLogin;
   const image = req.file.path.replace(/\\/g, "/");
 
@@ -49,6 +51,8 @@ exports.register = (req, res, next) => {
         kabupaten,
         kecamatan,
         kategori,
+        noRekening,
+        namaBank,
         statusLogin,
         image,
       });
