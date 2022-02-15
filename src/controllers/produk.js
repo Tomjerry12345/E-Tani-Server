@@ -30,6 +30,8 @@ exports.createProduk = (req, res, next) => {
   const namaPenjual = req.body.namaPenjual;
   const alamat = req.body.alamat;
   const noHp = req.body.noHp;
+  const noRekening = req.body.noRekening;
+  const namaBank = req.body.namaBank;
   const image = req.file.path.replace(/\\/g, "/");
 
   console.log("req.body => ", req.body);
@@ -45,6 +47,8 @@ exports.createProduk = (req, res, next) => {
     namaPenjual,
     alamat,
     noHp,
+    noRekening,
+    namaBank,
     image,
   });
 
@@ -164,6 +168,8 @@ exports.updateProduk = (req, res, next) => {
   const kategori = req.body.kategori;
   const harga = req.body.harga;
   const stok = req.body.stok;
+  const noRekening = req.body.noRekening;
+  const namaBank = req.body.namaBank;
   // const image = req.file.path.replace(/\\/g, "/");
   const produkId = req.params.produkId;
 
@@ -188,6 +194,8 @@ exports.updateProduk = (req, res, next) => {
       produk.kategori = kategori;
       produk.harga = harga;
       produk.stok = stok;
+      produk.noRekening = noRekening;
+      produk.namaBank = namaBank;
       produk.image = image;
 
       return produk.save();

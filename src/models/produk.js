@@ -45,6 +45,14 @@ const Produk = new Schema({
     type: String,
     required: true,
   },
+  noRekening: {
+    type: String,
+    required: true,
+  },
+  namaBank: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
