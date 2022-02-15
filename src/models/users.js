@@ -34,6 +34,14 @@ const Users = new Schema({
     type: String,
     required: true,
   },
+  noRekening: {
+    type: String,
+    required: true,
+  },
+  namaBank: {
+    type: String,
+    required: true,
+  },
   kategori: {
     type: String,
     required: true,
